@@ -9,12 +9,9 @@ def get_filepath1():
     
     file1 = askopenfilename(defaultextension=".txt",
                            filetypes=[("All Files", "*.*"),
-                                     ("Text Documents", "*.txt")])
-    
+                                     ("Text Documents", "*.txt")])  
     if file1 == "":
         file1 = None
-        showinfo("Error", "Please select both the files to compare")
-    
     else:
         first_path.set(file1)
         
@@ -23,12 +20,9 @@ def get_filepath2():
     
     file2 = askopenfilename(defaultextension=".txt",
                            filetypes=[("All Files", "*.*"),
-                                     ("Text Documents", "*.txt")])
-    
+                                     ("Text Documents", "*.txt")])  
     if file2 == "":
         file2 = None
-        showinfo("Error", "Please select both the files to compare")
-    
     else:
         second_path.set(file2)
         
@@ -46,16 +40,12 @@ def diffreport():
         ff = open(first_file,'r').readlines()
         sf = open(second_file,'r').readlines()
     
-       
         diff = difflib.HtmlDiff().make_file(ff,sf,first_file, second_file) #core of the code
     
-        #with open('Report.html','w') as f:
         with open(os.path.join(os.path.expanduser('~'),'Documents/Report.html'),'w') as f:
             f.write(diff)
             f.close()
             showinfo("Success", "Check the Report.html file at Documents Folder")
-    #print(f"First File = {first_path.get()} Second File = {second_path.get()}")
-    
     
 def About():
     showinfo("About","Text Compare Software is used to generate the HTML Report of the differences in the content of two files")
@@ -115,6 +105,5 @@ ContactMenu.add_command(label="Github",command=Github)
 MenuBar.add_cascade(label="Contact",menu=ContactMenu)
 
 window.config(menu=MenuBar)
-
 
 window.mainloop()
