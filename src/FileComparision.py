@@ -4,6 +4,7 @@ from tkinter.filedialog import askopenfilename
 from tkinter.messagebox import showinfo
 import os.path
 
+#Function to get the first file path
 def get_filepath1():
     
     file1 = askopenfilename(defaultextension=".txt",
@@ -17,7 +18,7 @@ def get_filepath1():
     else:
         first_path.set(file1)
         
-
+#Function to get the second file path
 def get_filepath2():
     
     file2 = askopenfilename(defaultextension=".txt",
@@ -31,7 +32,7 @@ def get_filepath2():
     else:
         second_path.set(file2)
         
-
+#Report generation Function using difflib
 def diffreport():
     
     if(first_path.get()==""):
@@ -46,7 +47,7 @@ def diffreport():
         sf = open(second_file,'r').readlines()
     
        
-        diff = difflib.HtmlDiff().make_file(ff,sf,first_file, second_file)
+        diff = difflib.HtmlDiff().make_file(ff,sf,first_file, second_file) #core of the code
     
         #with open('Report.html','w') as f:
         with open(os.path.join(os.path.expanduser('~'),'Documents/Report.html'),'w') as f:
@@ -56,7 +57,6 @@ def diffreport():
     #print(f"First File = {first_path.get()} Second File = {second_path.get()}")
     
     
-
 def About():
     showinfo("About","Text Compare Software is used to generate the HTML Report of the differences in the content of two files")
 
@@ -66,7 +66,7 @@ def Email():
 def Github():
     showinfo("Github","github.com/shanu8132")
 
-
+# Title, minsize,maxsize
 window = Tk()
 #window.configure(bg="#FF8976")
 window.geometry("400x270")
@@ -75,10 +75,11 @@ window.minsize(400,255)
 window.title("Text Compare")
 window.wm_iconbitmap("1.ico")
 
+#background image
 bgImage = PhotoImage(file = "background5.png")
 Label(window,image=bgImage).place(relwidth=1,relheight=1)
 
-
+# All Widgets
 first_path=StringVar()
 second_path = StringVar()
 
@@ -100,6 +101,7 @@ b3 = Button(text="Browse",command=get_filepath2,width=6,font="cambria 10 bold").
 
 b1 = Button(text="Generate Comparision Report",font="cambria 10 bold",command = diffreport).grid(row=7,column=3)
 
+#Menubar code
 MenuBar = Menu(window)
 
 FileMenu = Menu(MenuBar,tearoff=0)
